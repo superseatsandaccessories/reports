@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Super Seats & Accessories - Q4 2025 Report</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Chart.js and Datalabels Plugin -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --print-font: 'Inter', sans-serif;
+        }
+        body {
+            font-family: var(--print-font);
+            background-color: #f8fafc;
+            color: #0f172a;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        /* Chart Containers */
+        .chart-wrapper {
+            position: relative;
+            height: auto;
+            min-height: 300px;
+            width: 100%;
+        }
+
+        /* Print Specific Styles */
+        @media print {
+            body {
+                background-color: white;
+                padding: 0;
+                margin: 0;
+            }
+            nav, .no-print {
+                display: none !important;
+            }
+            .dashboard-card {
+                box-shadow: none !important;
+                border: 1px solid #ccc !important;
+                break-inside: avoid;
+                page-break-inside: avoid;
+                margin-bottom: 20px;
+            }
+            .grid-cols-1-print {
+                grid-template-columns: 1fr !important;
+            }
+            h1, h2, h3 {
+                color: black !important;
+            }
+            /* Force chart sizing for print */
+            canvas {
+                max-width: 100% !important;
+                max-height: 100% !important;
+            }
+        }
+    </style>
+</head>
+<body class="p-6 md:p-8">
+
+    <!-- Header / Nav (Hidden in Print) -->
+    <nav class="max-w-6xl mx-auto mb-8 flex justify-between items-center no-print">
+        <div class="flex items-center gap-4">
+            <img src="https://lh3.googleusercontent.com/d/1tScmvoam2uA7-hug7z6S9zW_wg7GcBi7" alt="Logo" class="h-16 w-auto object-contain">
+            <div>
+                <h1 class="text-2xl font-bold text-slate-800">Super Seats & Accessories</h1>
+                <p class="text-slate-500">Q4 2025 Sales Report</p>
+            </div>
+        </div>
+        <button onclick="window.print()" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg shadow transition-colors flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+            </svg>
+            Save as PDF
+        </button>
+    </nav>
+
+    <!-- Printable Header (Visible only in Print) -->
+    <div class="hidden print:block mb-8 border-b-2 border-black pb-4">
+        <div class="flex items-center gap-5 mb-4">
+            <img src="https://lh3.googleusercontent.com/d/1tScmvoam2uA7-hug7z6S9zW_wg7GcBi7" alt="Logo" class="h-20 w-auto object-contain">
+            <div>
+                <h1 class="text-4xl font-bold text-black">Super Seats & Accessories</h1>
+                <p class="text-xl text-gray-600 mt-1">Sales Performance Report</p>
+            </div>
+        </div>
+        <div class="flex justify-between mt-4 text-sm text-gray-600 border-t pt-2">
+            <span>Period: Q4 2025 (Oct-Dec)</span>
+            <span>Generated: Invoice Analysis System</span>
+        </div>
+    </div>
+
+    <main class="max-w-6xl mx-auto">
+        
+        <!-- Summary Statistics (Updated with Category Breakdown) -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+            <!-- Total Units -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 dashboard-card">
+                <p class="text-sm font-medium text-slate-500 uppercase tracking-wide">Total Units Sold</p>
+                <p class="text-3xl font-bold text-slate-800 mt-2" id="totalUnits">0</p>
+                <p class="text-xs text-slate-400 mt-1">Excl. Nut Bolts</p>
+            </div>
+
+            <!-- Top Seat Cover -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-l-4 border-emerald-500 dashboard-card">
+                <div class="flex justify-between items-start">
+                    <p class="text-sm font-medium text-emerald-600 uppercase tracking-wide">Top Seat Cover</p>
+                    <i class="fa-solid fa-chair text-emerald-200"></i>
+                </div>
+                <p class="text-lg font-bold text-slate-800 mt-2 leading-tight truncate" title="" id="topSeatName">-</p>
+                <p class="text-2xl font-bold text-emerald-600 mt-1" id="topSeatQty">0</p>
+            </div>
+
+            <!-- Top Matting -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-l-4 border-amber-500 dashboard-card">
+                <div class="flex justify-between items-start">
+                    <p class="text-sm font-medium text-amber-600 uppercase tracking-wide">Top Matting</p>
+                    <i class="fa-solid fa-rug text-amber-200"></i>
+                </div>
+                <p class="text-lg font-bold text-slate-800 mt-2 leading-tight truncate" title="" id="topMatName">-</p>
+                <p class="text-2xl font-bold text-amber-600 mt-1" id="topMatQty">0</p>
+            </div>
+
+            <!-- Top Accessory Set (New Section) -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-l-4 border-blue-500 dashboard-card">
+                <div class="flex justify-between items-start">
+                    <p class="text-sm font-medium text-blue-600 uppercase tracking-wide">Top Accessory Set</p>
+                    <i class="fa-solid fa-boxes-stacked text-blue-200"></i>
+                </div>
+                <p class="text-lg font-bold text-slate-800 mt-2 leading-tight truncate" title="" id="topSetName">-</p>
+                <p class="text-2xl font-bold text-blue-600 mt-1" id="topSetQty">0</p>
+            </div>
+        </div>
+
+        <!-- Charts Container -->
+        <div class="grid grid-cols-1 gap-8" id="reportContainer">
+            <!-- Charts injected via JS -->
+        </div>
+
+    </main>
+
+    <footer class="mt-12 text-center text-xs text-slate-400 print:text-black print:mt-8 border-t pt-4">
+        <p>End of Report • Generated from "Sales by Item - invoices.pdf"</p>
+    </footer>
+
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        // Register the DataLabels plugin globally
+        Chart.register(ChartDataLabels);
+
+        // Precise Data Extraction (Nut Bolts EXCLUDED)
+        const reportData = [
+            {
+                client: "SHELAR AUTOMOTIVE PRIVATE LIMITED",
+                fullWidth: true,
+                items: [
+                    { name: "Bracket Patti", qty: 10130 },
+                    { name: "Num Plates Frame Set", qty: 5500 },
+                    { name: "Num Plates Frame", qty: 2450 },
+                    { name: "Jupiter 125 Matting", qty: 1410 },
+                    { name: "Jupiter 113 Seat Cover", qty: 975 },
+                    { name: "Iqube Seat Cover", qty: 815 },
+                    { name: "Jupiter 113 Set (3 Acc)", qty: 771 },
+                    { name: "Iqube Matting", qty: 667 },
+                    { name: "Jupiter 125 Set (3 Acc)", qty: 570 },
+                    { name: "Iqube Set (2 Acc)", qty: 270 },
+                    { name: "Zest Seat Cover", qty: 150 },
+                    { name: "Zest Matting", qty: 145 },
+                    { name: "Zest Set Acc", qty: 140 },
+                    { name: "Ntorq Set (3 Acc)", qty: 46 },
+                    { name: "Ntorq Seat Cover", qty: 45 },
+                    { name: "Ntorq Matting", qty: 30 },
+                    { name: "Iqube Side Guard L", qty: 17 },
+                    { name: "Iqube All Round (Rear)", qty: 15 },
+                    { name: "Seat Repair", qty: 14 },
+                    { name: "Jupiter 125 All Round", qty: 3 },
+                    { name: "Jupiter 110 All Round", qty: 3 },
+                    { name: "Jupiter 110 Bidding", qty: 1 }
+                ]
+            },
+            {
+                client: "VIRAJ AUTOMOTIVE LLP",
+                items: [
+                    { name: "Bracket Patti", qty: 700 },
+                    { name: "Num Plates Frame Set", qty: 600 },
+                    { name: "Jupiter 125 Seat Cover", qty: 175 },
+                    { name: "Jupiter 113 Seat Cover", qty: 130 },
+                    { name: "Num Plates Frame", qty: 100 },
+                    { name: "Num Plates Frame (Front)", qty: 100 },
+                    { name: "Jupiter 125 Matting", qty: 85 },
+                    { name: "Jupiter 125 Set (3 Acc)", qty: 75 },
+                    { name: "Jupiter 113 Matting", qty: 60 },
+                    { name: "Jupiter 113 Set (3 Acc)", qty: 50 },
+                    { name: "Vehicle Covers", qty: 20 },
+                    { name: "Iqube Matting", qty: 10 }
+                ]
+            },
+            {
+                client: "PROFESSIONAL WHEELS LLP",
+                items: [
+                    { name: "Jupiter 113 Seat Cover", qty: 90 },
+                    { name: "Jupiter 113 Set (3 Acc)", qty: 70 },
+                    { name: "Jupiter 113 Matting", qty: 70 },
+                    { name: "Jupiter 125 Seat Cover", qty: 40 },
+                    { name: "Iqube Matting", qty: 40 },
+                    { name: "Iqube Seat Cover", qty: 40 },
+                    { name: "Iqube Set (2 Acc)", qty: 40 },
+                    { name: "Jupiter 125 Set (3 Acc)", qty: 20 },
+                    { name: "Jupiter 125 Matting", qty: 20 }
+                ]
+            },
+            {
+                client: "MANGHARAM TWO WHEELER AGENCIES LLP",
+                items: [
+                    { name: "Jupiter 113 Set (3 Acc)", qty: 100 },
+                    { name: "Jupiter 113 Matting", qty: 50 },
+                    { name: "Jupiter 113 Seat Cover", qty: 50 },
+                    { name: "Jupiter 125 Set (3 Acc)", qty: 50 },
+                    { name: "Jupiter 125 Matting", qty: 50 },
+                    { name: "Jupiter 125 Seat Cover", qty: 50 }
+                ]
+            },
+            {
+                client: "STATFIELD EQUIPMENTS PVT LTD",
+                items: [
+                    { name: "Luggage Belt", qty: 110 }
+                ]
+            },
+            {
+                client: "SWASTIK AUTO ACCESSORIES",
+                items: [
+                    { name: "Jupiter 113 Set (3 Acc)", qty: 10 },
+                    { name: "Jupiter 113 Matting", qty: 10 },
+                    { name: "Jupiter 125 Set (3 Acc)", qty: 10 },
+                    { name: "Jupiter 125 Matting", qty: 10 },
+                    { name: "Iqube Set (2 Acc)", qty: 10 },
+                    { name: "Iqube Matting", qty: 10 },
+                    { name: "Jupiter 113 Seat Cover", qty: 5 }
+                ]
+            },
+            {
+                client: "SHELAR AUTO (KHARADI)",
+                items: [
+                    { name: "Jupiter 125 Seat Cover", qty: 15 },
+                    { name: "Jupiter 110 Seat Cover", qty: 10 },
+                    { name: "Ntorq Seat Cover", qty: 10 },
+                    { name: "Jupiter 113 Matting", qty: 5 },
+                    { name: "Jupiter 125 Matting", qty: 5 },
+                    { name: "Ntorq Matting", qty: 5 },
+                    { name: "Matting", qty: 5 }
+                ]
+            },
+            {
+                client: "SAMARTHA VEER LAKSHMI MOTORS",
+                items: [
+                    { name: "Jupiter 113 Set (3 Acc)", qty: 10 }
+                ]
+            }
+        ];
+
+        // --- Logic to Render ---
+        const container = document.getElementById('reportContainer');
+        
+        let totalQty = 0;
+        
+        // Product Aggregation for Category Leaders
+        let productMap = {};
+
+        reportData.forEach((clientData, index) => {
+            // Calculate Totals 
+            const clientTotal = clientData.items.reduce((acc, curr) => acc + curr.qty, 0);
+            totalQty += clientTotal;
+
+            // Aggregate Products globally to find category leaders
+            clientData.items.forEach(item => {
+                const normName = item.name.trim(); // normalization
+                if(productMap[normName]) {
+                    productMap[normName] += item.qty;
+                } else {
+                    productMap[normName] = item.qty;
+                }
+            });
+
+            // Create Wrapper
+            const card = document.createElement('div');
+            card.className = `bg-white p-6 rounded-xl shadow-sm border border-slate-200 dashboard-card ${clientData.fullWidth ? '' : 'lg:w-full'}`;
+            
+            const chartHeight = Math.max(250, clientData.items.length * 35); 
+
+            card.innerHTML = `
+                <div class="flex justify-between items-end mb-4 border-b border-gray-100 pb-2">
+                    <h3 class="font-bold text-lg text-slate-800">${clientData.client}</h3>
+                    <span class="text-sm font-semibold bg-gray-100 px-3 py-1 rounded text-gray-600">Total: ${clientTotal.toLocaleString()}</span>
+                </div>
+                <div class="chart-wrapper" style="height: ${chartHeight}px;">
+                    <canvas id="canvas-${index}"></canvas>
+                </div>
+            `;
+            container.appendChild(card);
+
+            // Chart Generation
+            const ctx = document.getElementById(`canvas-${index}`).getContext('2d');
+            
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: clientData.items.map(i => i.name),
+                    datasets: [{
+                        data: clientData.items.map(i => i.qty),
+                        backgroundColor: '#3b82f6', 
+                        borderColor: '#2563eb',
+                        borderWidth: 1,
+                        barPercentage: 0.7,
+                        categoryPercentage: 0.9
+                    }]
+                },
+                options: {
+                    indexAxis: 'y', 
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    layout: {
+                        padding: { right: 60 }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: { enabled: false },
+                        datalabels: {
+                            color: '#000000',
+                            anchor: 'end',
+                            align: 'end',
+                            offset: 4,
+                            font: {
+                                weight: 'bold',
+                                size: 11
+                            },
+                            formatter: (value) => value.toLocaleString()
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: { display: true, color: '#f1f5f9' },
+                            ticks: { display: true }
+                        },
+                        y: {
+                            grid: { display: false },
+                            ticks: {
+                                color: '#334155',
+                                font: { weight: '500' },
+                                autoSkip: false
+                            }
+                        }
+                    }
+                }
+            });
+        });
+
+        // --- Determine Category Leaders ---
+        let topSeat = { name: '-', qty: 0 };
+        let topMat = { name: '-', qty: 0 };
+        let topSet = { name: '-', qty: 0 };
+
+        for (const [name, qty] of Object.entries(productMap)) {
+            const lowerName = name.toLowerCase();
+            
+            // Filter logic
+            if (lowerName.includes("matting")) {
+                if (qty > topMat.qty) {
+                    topMat = { name: name, qty: qty };
+                }
+            } else if (lowerName.includes("seat cover")) {
+                if (qty > topSeat.qty) {
+                    topSeat = { name: name, qty: qty };
+                }
+            } else if ((lowerName.includes("set") && lowerName.includes("acc")) || lowerName.includes("set of")) {
+                // Specific Logic for "Set of Accessories"
+                // Excludes Frames/Brackets by context of names found
+                if (qty > topSet.qty) {
+                    topSet = { name: name, qty: qty };
+                }
+            }
+        }
+
+        // Update Summary Stats
+        document.getElementById('totalUnits').textContent = totalQty.toLocaleString();
+        
+        document.getElementById('topSeatName').textContent = topSeat.name;
+        document.getElementById('topSeatName').title = topSeat.name;
+        document.getElementById('topSeatQty').textContent = topSeat.qty.toLocaleString() + ' units';
+
+        document.getElementById('topMatName').textContent = topMat.name;
+        document.getElementById('topMatName').title = topMat.name;
+        document.getElementById('topMatQty').textContent = topMat.qty.toLocaleString() + ' units';
+
+        document.getElementById('topSetName').textContent = topSet.name;
+        document.getElementById('topSetName').title = topSet.name;
+        document.getElementById('topSetQty').textContent = topSet.qty.toLocaleString() + ' units';
+
+    </script>
+</body>
+</html>
