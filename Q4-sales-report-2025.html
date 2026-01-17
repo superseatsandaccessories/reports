@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Automotive Accessories Sales Report</title>
+    <title>Super Seats & Accessories - Sales Report</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Chart.js -->
@@ -56,46 +56,38 @@
 
         /* Palette Classes for Dynamic Usage */
         .text-vibrant-blue { color: #4361EE; }
-        .bg-vibrant-blue { background-color: #4361EE; }
         .text-vibrant-pink { color: #F72585; }
-        .bg-vibrant-pink { background-color: #F72585; }
         .text-vibrant-cyan { color: #4CC9F0; }
-        .bg-vibrant-cyan { background-color: #4CC9F0; }
         .text-vibrant-purple { color: #7209B7; }
-        .bg-vibrant-purple { background-color: #7209B7; }
         .text-vibrant-orange { color: #FF9F1C; }
-        .bg-vibrant-orange { background-color: #FF9F1C; }
 
         .card-shadow {
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
         }
     </style>
-    <!-- 
-    Palette Name: Electric Vibrant
-    Usage: High contrast, energetic data visualization.
-    Colors: #4361EE, #F72585, #4CC9F0, #7209B7, #FF9F1C
-    NO SVG USED. NO MERMAID JS USED.
-    Plan:
-    1. Introduction with Key Metrics.
-    2. Customer Volume Analysis (Bar Chart).
-    3. Vehicle Model Dominance (Polar Area).
-    4. Product Category Breakdown (Doughnut).
-    5. Customer x Product Heatmap (Plotly Canvas).
-    -->
 </head>
 <body class="antialiased">
 
     <!-- Navigation / Header -->
     <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-200 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <div class="flex-shrink-0 flex items-center gap-3">
-                    <span class="text-2xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-[#4361EE] to-[#F72585]">
-                        AUTO<span class="text-[#1E293B]">METRICS</span>
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 flex items-center gap-4">
+                    <!-- Logo Image with Fallback Logic -->
+                    <!-- Changed to lh3.googleusercontent.com for better reliability and added onerror to hide if broken -->
+                    <img 
+                        src="https://lh3.googleusercontent.com/d/1tScmvoam2uA7-hug7z6S9zW_wg7GcBi7" 
+                        alt="Logo" 
+                        class="h-12 w-auto object-contain"
+                        referrerpolicy="no-referrer"
+                        onerror="this.style.display='none'"
+                    >
+                    <span class="text-2xl font-extrabold text-[#1E293B] tracking-tight">
+                        Super Seats & Accessories
                     </span>
                 </div>
-                <div class="hidden md:block text-sm font-semibold text-gray-500">
-                    Q1 Sales Performance Report
+                <div class="hidden md:block text-sm font-bold text-gray-500 uppercase tracking-wide bg-gray-100 px-3 py-1 rounded-full">
+                    Q4 Sales Orders Performance Report 2025
                 </div>
             </div>
         </div>
@@ -111,7 +103,7 @@
                     Sales Order Analysis
                 </h1>
                 <p class="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
-                    This report breaks down recent sales data across our dealer network. We examine order volumes, product preferences, and model-specific trends to highlight key revenue drivers and top-performing accounts like <span class="font-bold text-vibrant-blue">Dhanlaxmi TVS</span> and <span class="font-bold text-vibrant-blue">Balaji Auto</span>.
+                    This report breaks down Q4 2025 sales data across our dealer network. We examine order volumes, product preferences, and model-specific trends to highlight key revenue drivers and top-performing accounts like <span class="font-bold text-vibrant-blue">Dhanlaxmi TVS</span>.
                 </p>
             </div>
 
@@ -128,11 +120,11 @@
 
                 <!-- KPI 2 -->
                 <div class="bg-white rounded-xl p-6 card-shadow border-l-4 border-[#F72585] hover:-translate-y-1 transition-transform duration-300">
-                    <h3 class="text-sm font-bold text-gray-400 uppercase tracking-wider">Most Popular Model</h3>
+                    <h3 class="text-sm font-bold text-gray-400 uppercase tracking-wider">Lead Model</h3>
                     <div class="mt-2 flex items-baseline gap-2">
-                        <span class="text-3xl font-bold text-[#1E293B]">Jupiter</span>
+                        <span class="text-3xl font-bold text-[#1E293B]">Jupiter 113</span>
                     </div>
-                    <p class="text-sm text-gray-500 mt-2">Dominated sales across 113cc & 125cc variants.</p>
+                    <p class="text-sm text-gray-500 mt-2">Leading sales volume among specific vehicle models.</p>
                 </div>
 
                 <!-- KPI 3 -->
@@ -154,10 +146,10 @@
                         Dealer Performance Landscape
                     </h2>
                     <p class="text-gray-600 mb-4 leading-relaxed">
-                        The chart illustrates the total quantity of items ordered by each dealer. <span class="font-semibold text-vibrant-purple">Dhanlaxmi TVS</span> is the clear outlier, commanding a significant portion of the total volume, primarily driven by bulk orders of Jupiter accessory sets.
+                        The chart illustrates the total quantity of items ordered by each dealer. <span class="font-semibold text-vibrant-purple">Dhanlaxmi TVS</span> is the clear outlier, commanding a significant portion of the total volume.
                     </p>
                     <p class="text-gray-600 leading-relaxed">
-                        Other key players like <span class="font-semibold">Shelar TVS</span> and <span class="font-semibold">Balaji Auto</span> show consistent demand, though Balaji Auto's order composition is far more fragmented across smaller spare parts.
+                        Colors are distinct for each dealer to allow for easy identification in comparative analysis.
                     </p>
                 </div>
                 <div class="md:w-2/3 w-full">
@@ -180,7 +172,7 @@
                         Vehicle Model Dominance
                     </h2>
                     <p class="text-gray-600 text-sm">
-                        Which vehicle models are driving accessory sales? <span class="font-bold text-vibrant-pink">Jupiter</span> variants (113, 125, 110) are the overwhelming favorite, followed by the Activa 6G series.
+                        Breaking down by specific model: <span class="font-bold text-vibrant-pink">Jupiter 113</span> and <span class="font-bold text-vibrant-cyan">Jupiter 125</span> are visualized as distinct categories to show their individual contributions.
                     </p>
                 </div>
                 <div class="chart-container card-shadow flex-grow">
@@ -197,7 +189,7 @@
                         Product Category Mix
                     </h2>
                     <p class="text-gray-600 text-sm">
-                        Breaking down orders by type reveals that <span class="font-bold text-vibrant-cyan">Full Accessory Sets</span> and <span class="font-bold text-vibrant-cyan">Seat Covers</span> make up the majority of the business, indicating a strong trend towards bundling.
+                        A mix of Accessory Sets, Seat Covers, and Matting. Each category is assigned a unique color for clear differentiation.
                     </p>
                 </div>
                 <div class="chart-container card-shadow flex-grow">
@@ -215,7 +207,7 @@
                     Buying Patterns: Dealer vs. Product Category
                 </h2>
                 <p class="text-gray-600 max-w-4xl">
-                    This heatmap reveals the specific purchasing habits of each dealer. Darker cells indicate higher order quantities. Notice how <span class="font-semibold text-vibrant-blue">Dhanlaxmi TVS</span> focuses heavily on "Accessories" and "Seat Covers", whereas <span class="font-semibold text-vibrant-blue">Balaji Auto</span> has a much wider spread, purchasing significant amounts of "Spares" (Stands, Footrests) compared to other dealers.
+                    This heatmap reveals the specific purchasing habits of each dealer across different categories.
                 </p>
             </div>
             
@@ -229,7 +221,7 @@
         <footer class="border-t border-gray-200 pt-8 pb-12 text-center">
             <p class="text-gray-400 text-sm">
                 Generated based on Sales Order Report Data. <br>
-                Visualized with Chart.js & Plotly. No SVGs were used in the rendering of this report.
+                All data rights reserved to Super Seats & Accessories®, misusing any data is punishable offence. 
             </p>
         </footer>
 
@@ -238,7 +230,6 @@
     <!-- Data Processing & Chart Generation Script -->
     <script>
         // --- 1. Data Preparation ---
-        // Raw data parsed from the Sales Orders Report.md
         const rawData = [
             { customer: "Ajinkyatara TVS", items: [
                 { name: "JUPITER 113-SET OF 3 ACCESSORIES", qty: 1 }, { name: "JUPITER 113 SEAT COVER", qty: 1 },
@@ -252,7 +243,7 @@
                 { name: "BUZZER", qty: 20 }, { name: "SIDE STAND", qty: 21 },
                 { name: "FOLDING FOOT-REST", qty: 21 }, { name: "ACTIVA 125 SET OF ACCESSORIES", qty: 2 },
                 { name: "ACTIVA 125-SEAT COVER", qty: 2 }, { name: "ACTIVA 125 MATTING", qty: 2 },
-                { name: "Misc Spares", qty: 8 } // Aggregated small items for clarity
+                { name: "Misc Spares", qty: 8 }
             ]},
             { customer: "Chhatrapati TVS", items: [
                 { name: "JUPITER 113-SET OF 3 ACCESSORIES", qty: 19 }, { name: "JUPITER 113 SEAT COVER", qty: 35 },
@@ -264,9 +255,10 @@
                 { name: "JUPITER 113-SET OF 3 ACCESSORIES", qty: 107 }, { name: "JUPITER 125-SET OF 3 ACCESSORIES", qty: 65 },
                 { name: "JUPITER 125 SEAT COVER", qty: 106 }, { name: "ZEST-SET OF ACCESSORIES", qty: 16 },
                 { name: "ZEST SEAT COVER", qty: 16 }, { name: "ZEST MATTING", qty: 10 },
-                { name: "JUPITER 125 MATTING", qty: 25 }, { name: "JUPITER 113 SEAT COVER", qty: 51 },
-                { name: "JUPITER 113 MATTING", qty: 50 }, { name: "NTORQ Items", qty: 23 },
-                { name: "Misc Jupiter Spares", qty: 11 }
+                { name: "JUPITER 125 MATTING", qty: 25 }, { name: "JUPITER 125 SET OF 3 ACCESSORIES", qty: 45 },
+                { name: "JUPITER 113 DANDI Left", qty: 1 }, { name: "JUPITER 113 DANDI Right", qty: 10 },
+                { name: "JUPITER 113 SEAT COVER", qty: 51 }, { name: "JUPITER 113 MATTING", qty: 50 }, 
+                { name: "NTORQ Items", qty: 23 }, { name: "Misc Jupiter Spares", qty: 11 }
             ]},
             { customer: "Prashant Auto TVS", items: [
                 { name: "JUPITER 113-SET OF 3 ACCESSORIES", qty: 5 }, { name: "JUPITER 113 SEAT COVER", qty: 20 },
@@ -310,7 +302,6 @@
 
         // --- 2. Helper Functions ---
         
-        // Label Wrapping Logic (16 chars)
         function wrapLabel(str, maxLen = 16) {
             if (str.length <= maxLen) return str;
             const words = str.split(' ');
@@ -329,7 +320,30 @@
             return lines;
         }
 
-        // Common Chart Options
+        // Expanded Vibrant Palette (20 distinct colors to avoid repetition)
+        const vibrantPalette = [
+            '#4361EE', // Blue
+            '#F72585', // Pink
+            '#4CC9F0', // Cyan
+            '#7209B7', // Purple
+            '#FF9F1C', // Orange
+            '#06D6A0', // Teal
+            '#EF476F', // Red-Pink
+            '#FFD166', // Yellow
+            '#118AB2', // Ocean Blue
+            '#073B4C', // Midnight
+            '#9B5DE5', // Lavender
+            '#F15BB5', // Light Pink
+            '#FEE440', // Bright Yellow
+            '#00BBF9', // Azure
+            '#00F5D4', // Mint
+            '#9D4EDD', // Deep Violet
+            '#FF0054', // Crimson
+            '#3A0CA3', // Dark Blue
+            '#8338EC', // Electric Purple
+            '#FB5607'  // Red-Orange
+        ];
+
         const commonOptions = {
             responsive: true,
             maintainAspectRatio: false,
@@ -364,7 +378,7 @@
             return { name: c.customer, total: total };
         }).sort((a, b) => b.total - a.total);
 
-        // B. Model Extraction
+        // B. Model Extraction & Splitting
         const modelCounts = {};
         const categoryCounts = { "Accessories": 0, "Seat Covers": 0, "Matting": 0, "Spares": 0 };
         const heatmapData = [];
@@ -373,9 +387,11 @@
             cust.items.forEach(item => {
                 const upperName = item.name.toUpperCase();
                 
-                // Model Logic
+                // Detailed Model Logic
                 let model = "Other";
-                if (upperName.includes("JUPITER")) model = "Jupiter";
+                if (upperName.includes("JUPITER 113")) model = "Jupiter 113";
+                else if (upperName.includes("JUPITER 125")) model = "Jupiter 125";
+                else if (upperName.includes("JUPITER")) model = "Jupiter (Other)";
                 else if (upperName.includes("ACTIVA")) model = "Activa";
                 else if (upperName.includes("ZEST")) model = "Zest";
                 else if (upperName.includes("NTORQ")) model = "Ntorq";
@@ -392,7 +408,7 @@
                 
                 categoryCounts[category] += item.qty;
 
-                // Heatmap Data Prep (Flattening)
+                // Heatmap Data Prep
                 heatmapData.push({
                     customer: cust.customer,
                     category: category,
@@ -412,10 +428,8 @@
                 datasets: [{
                     label: 'Total Items Ordered',
                     data: customerTotals.map(c => c.total),
-                    backgroundColor: [
-                        '#4361EE', '#3A0CA3', '#7209B7', '#F72585', '#4CC9F0', 
-                        '#4895EF', '#560BAD', '#B5179E', '#F72585', '#4CC9F0'
-                    ],
+                    // Use palette dynamically for each bar
+                    backgroundColor: vibrantPalette.slice(0, customerTotals.length),
                     borderRadius: 6
                 }]
             },
@@ -437,14 +451,8 @@
                 labels: sortedModels.map(m => m[0]),
                 datasets: [{
                     data: sortedModels.map(m => m[1]),
-                    backgroundColor: [
-                        'rgba(67, 97, 238, 0.8)',   // Blue
-                        'rgba(247, 37, 133, 0.8)',  // Pink
-                        'rgba(76, 201, 240, 0.8)',  // Cyan
-                        'rgba(114, 9, 183, 0.8)',   // Purple
-                        'rgba(255, 159, 28, 0.8)',  // Orange
-                        'rgba(203, 213, 225, 0.8)'  // Grey
-                    ],
+                    // Use palette dynamically for distinct model colors
+                    backgroundColor: vibrantPalette.slice(0, sortedModels.length).map(color => color + 'CC'), // Add transparency
                     borderWidth: 1
                 }]
             },
@@ -462,7 +470,8 @@
                 labels: Object.keys(categoryCounts),
                 datasets: [{
                     data: Object.values(categoryCounts),
-                    backgroundColor: ['#4CC9F0', '#F72585', '#4361EE', '#FF9F1C'],
+                    // Use palette dynamically based on count
+                    backgroundColor: vibrantPalette.slice(0, Object.keys(categoryCounts).length),
                     hoverOffset: 10,
                     borderWidth: 0
                 }]
@@ -478,11 +487,9 @@
         });
 
         // Chart 4: Heatmap (Plotly)
-        // Aggregating heatmap data
-        const uniqueCustomers = customerTotals.map(c => c.name); // Already sorted by total vol
+        const uniqueCustomers = customerTotals.map(c => c.name);
         const uniqueCategories = ["Accessories", "Seat Covers", "Matting", "Spares"];
         
-        // Initialize 2D array with zeros
         const zData = uniqueCategories.map(() => uniqueCustomers.map(() => 0));
 
         heatmapData.forEach(d => {
@@ -521,7 +528,7 @@
             }
         };
         
-        const config = { responsive: true, displayModeBar: false, renderer: 'canvas' }; // Force Canvas renderer if possible or SVG (Plotly handles fallback, but we requested Canvas via config logic intention)
+        const config = { responsive: true, displayModeBar: false, renderer: 'canvas' }; 
         
         Plotly.newPlot('heatmapContainer', plotData, plotLayout, config);
 
