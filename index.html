@@ -34,6 +34,14 @@
             min-height: 300px;
             width: 100%;
         }
+        
+        .pie-chart-wrapper {
+            position: relative;
+            height: 350px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
 
         /* Print Specific Styles */
         @media print {
@@ -131,7 +139,7 @@
                 <p class="text-2xl font-bold text-amber-600 mt-1" id="topMatQty">0</p>
             </div>
 
-            <!-- Top Accessory Set (New Section) -->
+            <!-- Top Accessory Set -->
             <div class="bg-white p-6 rounded-xl shadow-sm border border-l-4 border-blue-500 dashboard-card">
                 <div class="flex justify-between items-start">
                     <p class="text-sm font-medium text-blue-600 uppercase tracking-wide">Top Accessory Set</p>
@@ -142,7 +150,17 @@
             </div>
         </div>
 
+        <!-- Sales Distribution Pie Chart -->
+        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 dashboard-card mb-8 print:break-inside-avoid">
+            <h3 class="font-bold text-lg text-slate-800 mb-4 border-b border-gray-100 pb-2">Category Sales Distribution</h3>
+            <div class="pie-chart-wrapper">
+                <canvas id="categoryPieChart"></canvas>
+            </div>
+            <p class="text-center text-xs text-slate-400 mt-2">Showing breakdown for Accessory Sets, Seat Covers, and Matting only</p>
+        </div>
+
         <!-- Charts Container -->
+        <h3 class="font-bold text-lg text-slate-800 mb-4 px-1 border-l-4 border-gray-500 pl-3">Client Breakdown</h3>
         <div class="grid grid-cols-1 gap-8" id="reportContainer">
             <!-- Charts injected via JS -->
         </div>
@@ -278,6 +296,13 @@
         // Product Aggregation for Category Leaders
         let productMap = {};
 
+        // Pie Chart Categories
+        let categoryTotals = {
+            'Seat Covers': 0,
+            'Matting': 0,
+            'Accessory Sets': 0
+        };
+
         reportData.forEach((clientData, index) => {
             // Calculate Totals 
             const clientTotal = clientData.items.reduce((acc, curr) => acc + curr.qty, 0);
@@ -286,10 +311,21 @@
             // Aggregate Products globally to find category leaders
             clientData.items.forEach(item => {
                 const normName = item.name.trim(); // normalization
+                const lowerName = normName.toLowerCase();
+                
                 if(productMap[normName]) {
                     productMap[normName] += item.qty;
                 } else {
                     productMap[normName] = item.qty;
+                }
+
+                // Categorize for Pie Chart
+                if (lowerName.includes("seat cover")) {
+                    categoryTotals['Seat Covers'] += item.qty;
+                } else if (lowerName.includes("matting")) {
+                    categoryTotals['Matting'] += item.qty;
+                } else if ((lowerName.includes("set") && lowerName.includes("acc")) || lowerName.includes("set of")) {
+                    categoryTotals['Accessory Sets'] += item.qty;
                 }
             });
 
@@ -385,7 +421,6 @@
                 }
             } else if ((lowerName.includes("set") && lowerName.includes("acc")) || lowerName.includes("set of")) {
                 // Specific Logic for "Set of Accessories"
-                // Excludes Frames/Brackets by context of names found
                 if (qty > topSet.qty) {
                     topSet = { name: name, qty: qty };
                 }
@@ -406,6 +441,47 @@
         document.getElementById('topSetName').textContent = topSet.name;
         document.getElementById('topSetName').title = topSet.name;
         document.getElementById('topSetQty').textContent = topSet.qty.toLocaleString() + ' units';
+
+        // --- Render Pie Chart ---
+        const pieCtx = document.getElementById('categoryPieChart').getContext('2d');
+        new Chart(pieCtx, {
+            type: 'pie',
+            data: {
+                labels: Object.keys(categoryTotals),
+                datasets: [{
+                    data: Object.values(categoryTotals),
+                    backgroundColor: [
+                        '#10b981', // Emerald (Seats)
+                        '#f59e0b', // Amber (Matting)
+                        '#3b82f6'  // Blue (Sets)
+                    ],
+                    borderWidth: 2,
+                    borderColor: '#ffffff'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            font: { size: 14 },
+                            padding: 20
+                        }
+                    },
+                    tooltip: { enabled: false },
+                    datalabels: {
+                        color: '#ffffff',
+                        font: {
+                            weight: 'bold',
+                            size: 16
+                        },
+                        formatter: (value) => value.toLocaleString()
+                    }
+                }
+            }
+        });
 
     </script>
 </body>
