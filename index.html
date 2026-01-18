@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Super Seats & Accessories - Q4 Report</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js and DataLabels Plugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .card-shadow { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03); border: 1px solid rgba(226, 232, 240, 0.8); }
+        .gradient-header { background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%); }
+        .table-row-hover:hover { background-color: #f8fafc; }
+        
+        /* Print Specific Styles */
+        @media print {
+            body { background-color: white; font-size: 12px; }
+            .no-print { display: none !important; }
+            .card-shadow { box-shadow: none; border: 1px solid #e5e7eb; break-inside: avoid; }
+            .gradient-header { padding-bottom: 1rem !important; background: white !important; color: black !important; border-bottom: 2px solid #1e3a8a; }
+            .gradient-header h1 { color: #1e3a8a !important; }
+            .gradient-header p { color: #64748b !important; }
+            .max-w-7xl { max-width: 100% !important; margin-top: 2rem !important; padding: 0 !important; }
+            .print\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)) !important; }
+            .print\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
+            .print\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+            canvas { max-height: 100% !important; }
+            .page-break-before-always { break-before: always; page-break-before: always; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 antialiased">
+
+    <!-- Header Section -->
+    <div class="gradient-header text-white pt-10 pb-24 px-8 relative shadow-lg">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+                <!-- Brand Section -->
+                <div class="flex items-center gap-5">
+                    <div class="logo-container bg-white p-3 rounded-xl shadow-lg border border-white/20">
+                        <img src="https://lh3.googleusercontent.com/d/1tScmvoam2uA7-hug7z6S9zW_wg7GcBi7" alt="Super Seats Logo" class="h-16 w-auto object-contain">
+                    </div>
+                    <div>
+                        <h1 class="text-3xl md:text-4xl font-bold tracking-tight text-white">Super Seats & Accessories</h1>
+                        <p class="text-blue-100 text-lg mt-1 font-light opacity-90">Q4 Sales Performance & Infographic Report</p>
+                    </div>
+                </div>
+                
+                <!-- Actions Section -->
+                <div class="flex flex-col items-end gap-3 w-full md:w-auto">
+                    <button onclick="window.print()" class="no-print bg-white text-blue-700 hover:bg-blue-50 font-semibold py-2.5 px-6 rounded-lg shadow-md transition-all duration-200 flex items-center gap-2 group transform hover:-translate-y-0.5">
+                        <i class="fas fa-print text-blue-600 group-hover:text-blue-800"></i> 
+                        <span>Print Report</span>
+                    </button>
+                    
+                    <div class="bg-white/10 px-4 py-2 rounded-lg backdrop-blur-sm border border-white/10 text-right">
+                        <div class="text-xs text-blue-200 uppercase tracking-wider font-semibold">Reporting Period</div>
+                        <div class="font-bold text-xl text-white">Oct - Dec 2025</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Container -->
+    <div class="max-w-7xl mx-auto px-6 -mt-16 pb-12 relative z-10">
+        
+        <!-- Executive Summary Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8 print:grid-cols-4">
+            <!-- Total Revenue -->
+            <div class="bg-white rounded-xl p-6 card-shadow border-t-4 border-blue-600 hover:shadow-lg transition-shadow duration-300">
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <div class="text-slate-500 text-xs font-bold uppercase tracking-wider">Total Revenue</div>
+                        <div class="mt-1 text-3xl font-bold text-slate-900">₹ 31.56 L</div>
+                    </div>
+                    <div class="p-2.5 bg-blue-50 rounded-lg text-blue-600"><i class="fas fa-wallet fa-lg"></i></div>
+                </div>
+                <div class="flex items-center text-xs text-green-600 font-medium bg-green-50 px-2 py-1 rounded w-fit">
+                    <i class="fas fa-check-circle mr-1.5"></i> Exact Invoice Match
+                </div>
+            </div>
+
+            <!-- Total Units -->
+            <div class="bg-white rounded-xl p-6 card-shadow border-t-4 border-indigo-500 hover:shadow-lg transition-shadow duration-300">
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <div class="text-slate-500 text-xs font-bold uppercase tracking-wider">Total Units Sold</div>
+                        <div class="mt-1 text-3xl font-bold text-slate-900">50,542</div>
+                    </div>
+                    <div class="p-2.5 bg-indigo-50 rounded-lg text-indigo-600"><i class="fas fa-boxes fa-lg"></i></div>
+                </div>
+                 <div class="text-xs text-slate-400 font-medium">Across all Categories</div>
+            </div>
+
+            <!-- Top Category -->
+            <div class="bg-white rounded-xl p-6 card-shadow border-t-4 border-purple-500 hover:shadow-lg transition-shadow duration-300">
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <div class="text-slate-500 text-xs font-bold uppercase tracking-wider">Top Category</div>
+                        <div class="mt-1 text-2xl font-bold text-slate-900">Accessories</div>
+                    </div>
+                     <div class="p-2.5 bg-purple-50 rounded-lg text-purple-600"><i class="fas fa-star fa-lg"></i></div>
+                </div>
+                <div class="text-xs text-purple-700 font-semibold bg-purple-50 px-2 py-1 rounded w-fit">50% of Total Revenue</div>
+            </div>
+
+            <!-- Top Client -->
+            <div class="bg-white rounded-xl p-6 card-shadow border-t-4 border-teal-500 hover:shadow-lg transition-shadow duration-300">
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <div class="text-slate-500 text-xs font-bold uppercase tracking-wider">Top Customer</div>
+                        <div class="mt-1 text-xl font-bold text-slate-900 truncate max-w-[140px]" title="Shelar Automotive">Shelar Auto</div>
+                    </div>
+                     <div class="p-2.5 bg-teal-50 rounded-lg text-teal-600"><i class="fas fa-trophy fa-lg"></i></div>
+                </div>
+                <div class="text-xs text-teal-700 font-semibold bg-teal-50 px-2 py-1 rounded w-fit">₹ 26.64L Revenue</div>
+            </div>
+        </div>
+
+        <!-- NEW INFOGRAPHICS SECTION -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8 print:grid-cols-2">
+            <!-- Customer Comparison Chart -->
+            <div class="bg-white p-6 rounded-xl card-shadow page-break-inside-avoid flex flex-col h-full">
+                <h3 class="text-lg font-bold text-slate-800 mb-6 flex items-center border-b border-slate-100 pb-3">
+                    <span class="bg-blue-100 text-blue-600 p-1.5 rounded mr-3 text-sm"><i class="fas fa-chart-bar"></i></span> 
+                    Revenue by Customer
+                </h3>
+                <div class="relative flex-grow min-h-[300px]">
+                    <canvas id="customerChart"></canvas>
+                </div>
+                <p class="text-xs text-slate-400 mt-4 text-center italic">Shelar Automotive leads significantly in sales volume.</p>
+            </div>
+
+             <!-- Top Products Chart -->
+             <div class="bg-white p-6 rounded-xl card-shadow page-break-inside-avoid flex flex-col h-full">
+                <h3 class="text-lg font-bold text-slate-800 mb-6 flex items-center border-b border-slate-100 pb-3">
+                    <span class="bg-yellow-100 text-yellow-600 p-1.5 rounded mr-3 text-sm"><i class="fas fa-crown"></i></span>
+                    Top 5 Products by Revenue
+                </h3>
+                <div class="relative flex-grow min-h-[300px]">
+                    <canvas id="topProductsChart"></canvas>
+                </div>
+                <p class="text-xs text-slate-400 mt-4 text-center italic">Jupiter 113 Accessory Sets are the best sellers.</p>
+            </div>
+        </div>
+
+        <!-- Charts Section (Original) -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8 print:grid-cols-3">
+            <!-- Revenue Mix Chart -->
+            <div class="bg-white p-6 rounded-xl card-shadow col-span-1 lg:col-span-1 page-break-inside-avoid flex flex-col">
+                <h3 class="text-lg font-bold text-slate-800 mb-6 border-b border-slate-100 pb-3">Category Revenue Mix</h3>
+                <div class="relative flex-grow min-h-[250px] flex items-center justify-center">
+                    <canvas id="revenueChart"></canvas>
+                </div>
+            </div>
+            
+            <!-- Category Performance Bars -->
+            <div class="bg-white p-6 rounded-xl card-shadow col-span-1 lg:col-span-2 page-break-inside-avoid">
+                <h3 class="text-lg font-bold text-slate-800 mb-6 border-b border-slate-100 pb-3">Category Performance Breakdown</h3>
+                <div class="space-y-8 pt-2">
+                    <!-- Accessories -->
+                    <div>
+                        <div class="flex justify-between items-end mb-2">
+                            <span class="font-semibold text-slate-700 text-sm flex items-center"><i class="fas fa-tools text-blue-500 mr-2 w-5"></i>Set of Accessories</span>
+                            <span class="font-bold text-slate-900 bg-blue-50 px-2 py-0.5 rounded text-sm">₹ 15,88,690</span>
+                        </div>
+                        <div class="w-full bg-slate-100 rounded-full h-4 overflow-hidden print:bg-slate-200">
+                            <div class="bg-blue-500 h-4 rounded-full shadow-sm print:bg-blue-600 transition-all duration-1000 ease-out" style="width: 50.3%"></div>
+                        </div>
+                        <div class="flex justify-between mt-1.5 text-xs text-slate-500 font-medium">
+                            <span>2,242 Sets Sold</span>
+                            <span>50.3% Share</span>
+                        </div>
+                    </div>
+
+                    <!-- Seat Covers -->
+                    <div>
+                        <div class="flex justify-between items-end mb-2">
+                            <span class="font-semibold text-slate-700 text-sm flex items-center"><i class="fas fa-chair text-purple-500 mr-2 w-5"></i>Seat Covers</span>
+                            <span class="font-bold text-slate-900 bg-purple-50 px-2 py-0.5 rounded text-sm">₹ 5,36,600</span>
+                        </div>
+                        <div class="w-full bg-slate-100 rounded-full h-4 overflow-hidden print:bg-slate-200">
+                            <div class="bg-purple-500 h-4 rounded-full shadow-sm print:bg-purple-600 transition-all duration-1000 ease-out" style="width: 17%"></div>
+                        </div>
+                         <div class="flex justify-between mt-1.5 text-xs text-slate-500 font-medium">
+                            <span>3,410 Pcs Sold</span>
+                            <span>17% Share</span>
+                        </div>
+                    </div>
+
+                    <!-- Matting -->
+                    <div>
+                        <div class="flex justify-between items-end mb-2">
+                            <span class="font-semibold text-slate-700 text-sm flex items-center"><i class="fas fa-shoe-prints text-teal-500 mr-2 w-5"></i>Matting</span>
+                            <span class="font-bold text-slate-900 bg-teal-50 px-2 py-0.5 rounded text-sm">₹ 5,14,370</span>
+                        </div>
+                        <div class="w-full bg-slate-100 rounded-full h-4 overflow-hidden print:bg-slate-200">
+                            <div class="bg-teal-500 h-4 rounded-full shadow-sm print:bg-teal-600 transition-all duration-1000 ease-out" style="width: 16.3%"></div>
+                        </div>
+                        <div class="flex justify-between mt-1.5 text-xs text-slate-500 font-medium">
+                            <span>3,297 Pcs Sold</span>
+                            <span>16.3% Share</span>
+                        </div>
+                    </div>
+                    
+                     <!-- Other -->
+                     <div>
+                        <div class="flex justify-between items-end mb-2">
+                            <span class="font-semibold text-slate-700 text-sm flex items-center"><i class="fas fa-boxes text-slate-500 mr-2 w-5"></i>Other (Frames, Nuts, Bolts)</span>
+                            <span class="font-bold text-slate-900 bg-slate-100 px-2 py-0.5 rounded text-sm">₹ 5,17,010</span>
+                        </div>
+                        <div class="w-full bg-slate-100 rounded-full h-4 overflow-hidden print:bg-slate-200">
+                            <div class="bg-slate-500 h-4 rounded-full shadow-sm print:bg-slate-600 transition-all duration-1000 ease-out" style="width: 16.4%"></div>
+                        </div>
+                        <div class="flex justify-between mt-1.5 text-xs text-slate-500 font-medium">
+                            <span>41,593 Pcs Sold</span>
+                            <span>16.4% Share</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Customer Detail Section Title -->
+        <div class="flex items-center space-x-4 mb-8 mt-16 page-break-before-always">
+            <div class="h-10 w-1.5 bg-blue-600 rounded-full shadow-sm"></div>
+            <div>
+                <h2 class="text-2xl font-bold text-slate-800">Detailed Sales by Customer</h2>
+                <p class="text-slate-500 text-sm">Comprehensive breakdown of Q4 invoices</p>
+            </div>
+        </div>
+
+        <!-- Customer Cards Grid -->
+        <div class="space-y-8">
+
+            <!-- Card 1: Shelar Automotive -->
+            <div class="bg-white rounded-xl card-shadow overflow-hidden page-break-inside-avoid">
+                <div class="bg-slate-50 p-5 border-b border-slate-100 flex justify-between items-center bg-blue-50/30">
+                    <div class="flex items-center gap-3">
+                         <div class="h-10 w-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-lg">S</div>
+                         <div>
+                             <h3 class="font-bold text-slate-800 text-lg">SHELAR AUTOMOTIVE PRIVATE LIMITED</h3>
+                             <div class="text-xs text-slate-500">Sales ID: #CUST-001</div>
+                         </div>
+                    </div>
+                    <span class="bg-blue-100 text-blue-700 text-xs font-bold px-3 py-1.5 rounded-full shadow-sm border border-blue-200">Volume Leader</span>
+                </div>
+                <div class="p-0 overflow-x-auto">
+                    <table class="w-full text-sm text-left">
+                        <thead class="text-xs text-slate-500 uppercase bg-slate-50/50 border-b border-slate-100">
+                            <tr>
+                                <th class="px-6 py-4 font-semibold tracking-wider">Category</th>
+                                <th class="px-6 py-4 text-right font-semibold tracking-wider">Quantity Sold</th>
+                                <th class="px-6 py-4 text-right font-semibold tracking-wider">Total Amount (₹)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100">
+                            <tr class="bg-white table-row-hover transition-colors">
+                                <td class="px-6 py-4 font-medium text-slate-700">Set of Accessories</td>
+                                <td class="px-6 py-4 text-right font-mono text-slate-600">1,797</td>
+                                <td class="px-6 py-4 text-right font-bold text-blue-600 font-mono">12,91,740</td>
+                            </tr>
+                            <tr class="bg-white table-row-hover transition-colors">
+                                <td class="px-6 py-4 font-medium text-slate-700">Seat Covers</td>
+                                <td class="px-6 py-4 text-right font-mono text-slate-600">2,795</td>
+                                <td class="px-6 py-4 text-right font-bold text-purple-600 font-mono">4,47,200</td>
+                            </tr>
+                            <tr class="bg-white table-row-hover transition-colors">
+                                <td class="px-6 py-4 font-medium text-slate-700">Matting</td>
+                                <td class="px-6 py-4 text-right font-mono text-slate-600">2,862</td>
+                                <td class="px-6 py-4 text-right font-bold text-teal-600 font-mono">4,57,920</td>
+                            </tr>
+                            <tr class="bg-slate-50/30">
+                                <td class="px-6 py-4 font-medium text-slate-500 italic">Other Items (Frames, Bracket Patti, Nuts/Bolts)</td>
+                                <td class="px-6 py-4 text-right text-slate-500 font-mono">38,563</td>
+                                <td class="px-6 py-4 text-right text-slate-600 font-semibold font-mono">4,67,160</td>
+                            </tr>
+                            <tr class="bg-slate-100 border-t border-slate-200">
+                                <td class="px-6 py-4 font-bold text-slate-800">TOTAL</td>
+                                <td class="px-6 py-4 text-right font-bold text-slate-800 font-mono">46,017</td>
+                                <td class="px-6 py-4 text-right font-bold text-slate-900 text-lg font-mono">₹ 26,64,020</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Card 2: Viraj Automotive -->
+             <div class="bg-white rounded-xl card-shadow overflow-hidden page-break-inside-avoid">
+                <div class="bg-slate-50 p-5 border-b border-slate-100 flex justify-between items-center">
+                    <div class="flex items-center gap-3">
+                         <div class="h-10 w-10 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center font-bold text-lg">V</div>
+                         <div>
+                             <h3 class="font-bold text-slate-800 text-lg">VIRAJ AUTOMOTIVE LLP</h3>
+                             <div class="text-xs text-slate-500">Sales ID: #CUST-002</div>
+                         </div>
+                    </div>
+                </div>
+                <div class="p-0 overflow-x-auto">
+                    <table class="w-full text-sm text-left">
+                        <thead class="text-xs text-slate-500 uppercase bg-slate-50/50 border-b border-slate-100">
+                            <tr>
+                                <th class="px-6 py-4 font-semibold tracking-wider">Category</th>
+                                <th class="px-6 py-4 text-right font-semibold tracking-wider">Quantity Sold</th>
+                                <th class="px-6 py-4 text-right font-semibold tracking-wider">Total Amount (₹)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100">
+                            <tr class="bg-white table-row-hover transition-colors">
+                                <td class="px-6 py-4 font-medium text-slate-700">Set of Accessories</td>
+                                <td class="px-6 py-4 text-right font-mono text-slate-600">125</td>
+                                <td class="px-6 py-4 text-right font-bold text-blue-600 font-mono">91,000</td>
+                            </tr>
+                            <tr class="bg-white table-row-hover transition-colors">
+                                <td class="px-6 py-4 font-medium text-slate-700">Seat Covers</td>
+                                <td class="px-6 py-4 text-right font-mono text-slate-600">305</td>
+                                <td class="px-6 py-4 text-right font-bold text-purple-600 font-mono">48,800</td>
+                            </tr>
+                            <tr class="bg-white table-row-hover transition-colors">
+                                <td class="px-6 py-4 font-medium text-slate-700">Matting</td>
+                                <td class="px-6 py-4 text-right font-mono text-slate-600">155</td>
+                                <td class="px-6 py-4 text-right font-bold text-teal-600 font-mono">24,800</td>
+                            </tr>
+                            <tr class="bg-slate-50/30">
+                                <td class="px-6 py-4 font-medium text-slate-500 italic">Other Items (Frames, Covers, Nut Bolt)</td>
+                                <td class="px-6 py-4 text-right text-slate-500 font-mono">2,920</td>
+                                <td class="px-6 py-4 text-right text-slate-600 font-semibold font-mono">40,500</td>
+                            </tr>
+                            <tr class="bg-slate-100 border-t border-slate-200">
+                                <td class="px-6 py-4 font-bold text-slate-800">TOTAL</td>
+                                <td class="px-6 py-4 text-right font-bold text-slate-800 font-mono">3,505</td>
+                                <td class="px-6 py-4 text-right font-bold text-slate-900 text-lg font-mono">₹ 2,05,100</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Card 3: Mangharam Two Wheeler -->
+            <div class="bg-white rounded-xl card-shadow overflow-hidden page-break-inside-avoid">
+                <div class="bg-slate-50 p-5 border-b border-slate-100 flex justify-between items-center">
+                    <div class="flex items-center gap-3">
+                         <div class="h-10 w-10 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center font-bold text-lg">M</div>
+                         <div>
+                             <h3 class="font-bold text-slate-800 text-lg">MANGHARAM TWO WHEELER AGENCIES LLP</h3>
+                             <div class="text-xs text-slate-500">Sales ID: #CUST-003</div>
+                         </div>
+                    </div>
+                </div>
+                <div class="p-0 overflow-x-auto">
+                    <table class="w-full text-sm text-left">
+                        <thead class="text-xs text-slate-500 uppercase bg-slate-50/50 border-b border-slate-100">
+                            <tr>
+                                <th class="px-6 py-4 font-semibold tracking-wider">Category</th>
+                                <th class="px-6 py-4 text-right font-semibold tracking-wider">Quantity Sold</th>
+                                <th class="px-6 py-4 text-right font-semibold tracking-wider">Total Amount (₹)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100">
+                            <tr class="bg-white table-row-hover transition-colors">
+                                <td class="px-6 py-4 font-medium text-slate-700">Set of Accessories</td>
+                                <td class="px-6 py-4 text-right font-mono text-slate-600">150</td>
+                                <td class="px-6 py-4 text-right font-bold text-blue-600 font-mono">1,05,000</td>
+                            </tr>
+                            <tr class="bg-white table-row-hover transition-colors">
+                                <td class="px-6 py-4 font-medium text-slate-700">Seat Covers</td>
+                                <td class="px-6 py-4 text-right font-mono text-slate-600">100</td>
+                                <td class="px-6 py-4 text-right font-bold text-purple-600 font-mono">14,000</td>
+                            </tr>
+                            <tr class="bg-white table-row-hover transition-colors">
+                                <td class="px-6 py-4 font-medium text-slate-700">Matting</td>
+                                <td class="px-6 py-4 text-right font-mono text-slate-600">100</td>
+                                <td class="px-6 py-4 text-right font-bold text-teal-600 font-mono">10,000</td>
+                            </tr>
+                            <tr class="bg-slate-100 border-t border-slate-200">
+                                <td class="px-6 py-4 font-bold text-slate-800">TOTAL</td>
+                                <td class="px-6 py-4 text-right font-bold text-slate-800 font-mono">350</td>
+                                <td class="px-6 py-4 text-right font-bold text-slate-900 text-lg font-mono">₹ 1,29,000</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Card 4: Professional Wheels -->
+            <div class="bg-white rounded-xl card-shadow overflow-hidden page-break-inside-avoid">
+                <div class="bg-slate-50 p-5 border-b border-slate-100 flex justify-between items-center">
+                    <div class="flex items-center gap-3">
+                         <div class="h-10 w-10 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center font-bold text-lg">P</div>
+                         <div>
+                             <h3 class="font-bold text-slate-800 text-lg">PROFESSIONAL WHEELS LLP</h3>
+                             <div class="text-xs text-slate-500">Sales ID: #CUST-004</div>
+                         </div>
+                    </div>
+                </div>
+                <div class="p-0 overflow-x-auto">
+                    <table class="w-full text-sm text-left">
+                        <thead class="text-xs text-slate-500 uppercase bg-slate-50/50 border-b border-slate-100">
+                            <tr>
+                                <th class="px-6 py-4 font-semibold tracking-wider">Category</th>
+                                <th class="px-6 py-4 text-right font-semibold tracking-wider">Quantity Sold</th>
+                                <th class="px-6 py-4 text-right font-semibold tracking-wider">Total Amount (₹)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100">
+                            <tr class="bg-white table-row-hover transition-colors">
+                                <td class="px-6 py-4 font-medium text-slate-700">Set of Accessories</td>
+                                <td class="px-6 py-4 text-right font-mono text-slate-600">130</td>
+                                <td class="px-6 py-4 text-right font-bold text-blue-600 font-mono">77,350</td>
+                            </tr>
+                            <tr class="bg-white table-row-hover transition-colors">
+                                <td class="px-6 py-4 font-medium text-slate-700">Seat Covers</td>
+                                <td class="px-6 py-4 text-right font-mono text-slate-600">170</td>
+                                <td class="px-6 py-4 text-right font-bold text-purple-600 font-mono">20,400</td>
+                            </tr>
+                            <tr class="bg-white table-row-hover transition-colors">
+                                <td class="px-6 py-4 font-medium text-slate-700">Matting</td>
+                                <td class="px-6 py-4 text-right font-mono text-slate-600">130</td>
+                                <td class="px-6 py-4 text-right font-bold text-teal-600 font-mono">15,600</td>
+                            </tr>
+                            <tr class="bg-slate-100 border-t border-slate-200">
+                                <td class="px-6 py-4 font-bold text-slate-800">TOTAL</td>
+                                <td class="px-6 py-4 text-right font-bold text-slate-800 font-mono">430</td>
+                                <td class="px-6 py-4 text-right font-bold text-slate-900 text-lg font-mono">₹ 1,13,350</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Card 5: Swastik Auto Accessories -->
+            <div class="bg-white rounded-xl card-shadow overflow-hidden page-break-inside-avoid">
+                <div class="bg-slate-50 p-5 border-b border-slate-100 flex justify-between items-center">
+                    <div class="flex items-center gap-3">
+                         <div class="h-10 w-10 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center font-bold text-lg">S</div>
+                         <div>
+                             <h3 class="font-bold text-slate-800 text-lg">SWASTIK AUTO ACCESSORIES</h3>
+                             <div class="text-xs text-slate-500">Sales ID: #CUST-005</div>
+                         </div>
+                    </div>
+                </div>
+                <div class="p-0 overflow-x-auto">
+                    <table class="w-full text-sm text-left">
+                        <thead class="text-xs text-slate-500 uppercase bg-slate-50/50 border-b border-slate-100">
+                            <tr>
+                                <th class="px-6 py-4 font-semibold tracking-wider">Category</th>
+                                <th class="px-6 py-4 text-right font-semibold tracking-wider">Quantity Sold</th>
+                                <th class="px-6 py-4 text-right font-semibold tracking-wider">Total Amount (₹)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100">
+                            <tr class="bg-white table-row-hover transition-colors">
+                                <td class="px-6 py-4 font-medium text-slate-700">Set of Accessories</td>
+                                <td class="px-6 py-4 text-right font-mono text-slate-600">30</td>
+                                <td class="px-6 py-4 text-right font-bold text-blue-600 font-mono">16,600</td>
+                            </tr>
+                            <tr class="bg-white table-row-hover transition-colors">
+                                <td class="px-6 py-4 font-medium text-slate-700">Seat Covers</td>
+                                <td class="px-6 py-4 text-right font-mono text-slate-600">5</td>
+                                <td class="px-6 py-4 text-right font-bold text-purple-600 font-mono">600</td>
+                            </tr>
+                            <tr class="bg-white table-row-hover transition-colors">
+                                <td class="px-6 py-4 font-medium text-slate-700">Matting</td>
+                                <td class="px-6 py-4 text-right font-mono text-slate-600">30</td>
+                                <td class="px-6 py-4 text-right font-bold text-teal-600 font-mono">2,850</td>
+                            </tr>
+                            <tr class="bg-slate-100 border-t border-slate-200">
+                                <td class="px-6 py-4 font-bold text-slate-800">TOTAL</td>
+                                <td class="px-6 py-4 text-right font-bold text-slate-800 font-mono">65</td>
+                                <td class="px-6 py-4 text-right font-bold text-slate-900 text-lg font-mono">₹ 20,050</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Card 6: Small Accounts (Combined) -->
+            <div class="bg-white rounded-xl card-shadow overflow-hidden page-break-inside-avoid">
+                <div class="bg-slate-50 p-5 border-b border-slate-100 flex justify-between items-center">
+                    <div class="flex items-center gap-3">
+                         <div class="h-10 w-10 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center font-bold text-lg"><i class="fas fa-users"></i></div>
+                         <div>
+                             <h3 class="font-bold text-slate-800 text-lg">OTHER ACCOUNTS</h3>
+                             <div class="text-xs text-slate-500">Includes Kharadi, Samartha, Statfield</div>
+                         </div>
+                    </div>
+                </div>
+                <div class="p-0 overflow-x-auto">
+                    <table class="w-full text-sm text-left">
+                        <thead class="text-xs text-slate-500 uppercase bg-slate-50/50 border-b border-slate-100">
+                            <tr>
+                                <th class="px-6 py-4 font-semibold tracking-wider">Category</th>
+                                <th class="px-6 py-4 text-right font-semibold tracking-wider">Quantity Sold</th>
+                                <th class="px-6 py-4 text-right font-semibold tracking-wider">Total Amount (₹)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100">
+                            <tr class="bg-white table-row-hover transition-colors">
+                                <td class="px-6 py-4 font-medium text-slate-700">Set of Accessories</td>
+                                <td class="px-6 py-4 text-right font-mono text-slate-600">10</td>
+                                <td class="px-6 py-4 text-right font-bold text-blue-600 font-mono">7,000</td>
+                            </tr>
+                            <tr class="bg-white table-row-hover transition-colors">
+                                <td class="px-6 py-4 font-medium text-slate-700">Seat Covers</td>
+                                <td class="px-6 py-4 text-right font-mono text-slate-600">35</td>
+                                <td class="px-6 py-4 text-right font-bold text-purple-600 font-mono">5,600</td>
+                            </tr>
+                            <tr class="bg-white table-row-hover transition-colors">
+                                <td class="px-6 py-4 font-medium text-slate-700">Matting</td>
+                                <td class="px-6 py-4 text-right font-mono text-slate-600">20</td>
+                                <td class="px-6 py-4 text-right font-bold text-teal-600 font-mono">3,200</td>
+                            </tr>
+                             <tr class="bg-slate-50/30">
+                                <td class="px-6 py-4 font-medium text-slate-500 italic">Other Items (Luggage Belts)</td>
+                                <td class="px-6 py-4 text-right text-slate-500 font-mono">110</td>
+                                <td class="px-6 py-4 text-right text-slate-600 font-semibold font-mono">9,350</td>
+                            </tr>
+                            <tr class="bg-slate-100 border-t border-slate-200">
+                                <td class="px-6 py-4 font-bold text-slate-800">TOTAL</td>
+                                <td class="px-6 py-4 text-right font-bold text-slate-800 font-mono">175</td>
+                                <td class="px-6 py-4 text-right font-bold text-slate-900 text-lg font-mono">₹ 25,150</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Footer / Disclaimer -->
+        <div class="mt-16 text-center border-t border-slate-200 pt-8 page-break-inside-avoid">
+            <div class="flex items-center justify-center gap-2 mb-2 text-slate-400">
+                <i class="fas fa-shield-alt"></i>
+                <span class="text-xs font-semibold uppercase tracking-wider">Internal Document</span>
+            </div>
+            <p class="text-sm text-slate-500 max-w-2xl mx-auto"><strong>Verification:</strong> Financial data has been verified against the complete invoice ledger "Sales by Item - invoices by price.pdf". Total Revenue matches the document checksum of ₹ 31,56,670.</p>
+            <p class="text-xs text-slate-400 mt-4">&copy; 2026 Super Seats and Accessories. All rights reserved.</p>
+        </div>
+    </div>
+
+    <!-- Chart Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Register DataLabels plugin
+            Chart.register(ChartDataLabels);
+            
+            // Common default settings for datalabels
+            Chart.defaults.set('plugins.datalabels', {
+                color: '#fff',
+                font: {
+                    weight: 'bold',
+                    family: 'Inter',
+                    size: 11
+                },
+                padding: 4,
+                display: 'auto'
+            });
+
+            // Colors
+            const colors = {
+                blue: '#3b82f6',
+                purple: '#a855f7',
+                teal: '#14b8a6',
+                gray: '#94a3b8',
+                dark: '#1e293b'
+            };
+
+            // Chart 1: Revenue Mix (Doughnut)
+            const revenueCtx = document.getElementById('revenueChart').getContext('2d');
+            const revenueData = {
+                labels: ['Accessories', 'Seat Covers', 'Matting', 'Other'],
+                datasets: [{
+                    data: [1588690, 536600, 514370, 517010], 
+                    backgroundColor: [colors.blue, colors.purple, colors.teal, colors.gray],
+                    borderWidth: 2,
+                    borderColor: '#ffffff',
+                    hoverOffset: 4
+                }]
+            };
+            new Chart(revenueCtx, {
+                type: 'doughnut',
+                data: revenueData,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { 
+                        legend: { position: 'right', labels: { usePointStyle: true, boxWidth: 10, padding: 15, font: { family: 'Inter', size: 12 } } },
+                        datalabels: {
+                            formatter: (value, ctx) => {
+                                let sum = 0;
+                                let dataArr = ctx.chart.data.datasets[0].data;
+                                dataArr.map(data => {
+                                    sum += data;
+                                });
+                                let percentage = (value * 100 / sum).toFixed(1) + "%";
+                                return percentage;
+                            },
+                            color: '#fff',
+                            backgroundColor: 'rgba(30, 41, 59, 0.7)',
+                            borderRadius: 4,
+                            padding: 6
+                        }
+                    },
+                    cutout: '65%',
+                    layout: { padding: 10 }
+                }
+            });
+
+            // Chart 2: Customer Comparison (Bar)
+            const customerCtx = document.getElementById('customerChart').getContext('2d');
+            new Chart(customerCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Shelar Auto', 'Viraj Auto', 'Mangharam', 'Prof. Wheels', 'Other'],
+                    datasets: [{
+                        label: 'Revenue (₹)',
+                        data: [2664020, 205100, 129000, 113350, 45200],
+                        backgroundColor: ['#1d4ed8', '#60a5fa', '#60a5fa', '#60a5fa', '#94a3b8'],
+                        borderRadius: 6,
+                        barPercentage: 0.6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { 
+                        legend: { display: false },
+                        datalabels: {
+                            anchor: 'end',
+                            align: 'top',
+                            offset: 4,
+                            color: '#334155', // Slate-700
+                            font: { weight: 'bold', size: 10 },
+                            formatter: (value) => '₹' + (value/100000).toFixed(1) + 'L'
+                        }
+                    },
+                    scales: {
+                        y: { 
+                            beginAtZero: true, 
+                            grid: { display: true, borderDash: [2, 4], color: '#e2e8f0', drawBorder: false }, 
+                            ticks: { callback: (val) => '₹' + (val/100000).toFixed(1) + 'L', font: { size: 10 }, color: '#64748b', padding: 10 } 
+                        },
+                        x: { 
+                            grid: { display: false },
+                            ticks: { font: { size: 11, family: 'Inter' }, color: '#475569' }
+                        }
+                    },
+                    layout: { padding: { top: 20 } }
+                }
+            });
+
+            // Chart 3: Top Products (Horizontal Bar)
+            const productCtx = document.getElementById('topProductsChart').getContext('2d');
+            new Chart(productCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Jupiter 113 Acc.', 'Jupiter 125 Acc.', 'Jup. 125 Matting', 'Iqube Acc.', 'Jup. 113 Cover'],
+                    datasets: [{
+                        label: 'Est. Revenue',
+                        data: [680000, 500000, 240000, 210000, 190000], 
+                        backgroundColor: '#f59e0b',
+                        borderRadius: 6,
+                        barPercentage: 0.7
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { 
+                        legend: { display: false },
+                        datalabels: {
+                            anchor: 'end',
+                            align: 'end',
+                            offset: 4,
+                            color: '#334155',
+                            font: { weight: 'bold', size: 10 },
+                            formatter: (value) => '₹' + (value/1000) + 'k'
+                        }
+                    },
+                    scales: {
+                        x: { 
+                            beginAtZero: true, 
+                            grid: { display: true, borderDash: [2, 4], color: '#e2e8f0', drawBorder: false }, 
+                            ticks: { callback: (val) => '₹' + (val/1000) + 'k', font: { size: 10 }, color: '#64748b' } 
+                        },
+                        y: { 
+                            grid: { display: false },
+                            ticks: { font: { size: 11, family: 'Inter' }, color: '#475569' }
+                        }
+                    },
+                    layout: { padding: { right: 30 } }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
